@@ -25,7 +25,7 @@ client = MyClient()
     description="Description/body of the embed",
     footer="footer of the embed"
 )
-async def embed(interaction: discord.Interaction, title: str, description: str):
+async def embed(interaction: discord.Interaction, title: str, description: str, footer: str):
     embed = discord.Embed(
         title=title,
         description=description,
