@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
+GUILD_ID = os.getenv("SERVER_ID")
 
 class MyClient(discord.Client):
     def __init__(self):
@@ -14,7 +15,8 @@ class MyClient(discord.Client):
 
     async def on_ready(self):
         print(f"Bot is online as {self.user}")
-        await self.tree.sync()
+        await self.tree.sync(guild=guild)
+        guild = discord.Object(id=GUILD_ID)
         print("Slash commands synced.")
 
 client = MyClient()
