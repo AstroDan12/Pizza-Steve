@@ -21,6 +21,10 @@ class MyClient(discord.Client):
 
 client = MyClient()
 
+@client.tree.command(name="userphone", description="hopefully starts userphone")
+async def (interaction: discord.Interaction):
+    await interaction.response.send_message('/userphone')
+
 @client.tree.command(name="embed", description="Send a custom embed with title and description")
 @app_commands.describe(
     title="Title of the embed",
