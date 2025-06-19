@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
-GUILD_ID = os.getenv("SERVER_ID")
+GUILD_ID = int(os.getenv("SERVER_ID"))
 
 class MyClient(discord.Client):
     def __init__(self):
