@@ -25,13 +25,14 @@ client = MyClient()
     description="Description/body of the embed",
     footer="footer of the embed"
 )
-async def embed(interaction: discord.Interaction, title: str, description: str, footer: str):
+async def embed(interaction: discord.Interaction, title: str, description: str, footer: str = None):
     embed = discord.Embed(
         title=title,
         description=description,
         color=discord.Color.blue()
     )
-    embed.set_footer(text=footer)
+    if footer:  
+        embed.set_footer(text=footer)
     await interaction.response.send_message(embed=embed)
 
 client.run(TOKEN)
