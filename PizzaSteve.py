@@ -22,7 +22,8 @@ client = MyClient()
 @client.tree.command(name="embed", description="Send a custom embed with title and description")
 @app_commands.describe(
     title="Title of the embed",
-    description="Description/body of the embed"
+    description="Description/body of the embed",
+    footer="footer of the embed"
 )
 async def embed(interaction: discord.Interaction, title: str, description: str):
     embed = discord.Embed(
@@ -30,7 +31,7 @@ async def embed(interaction: discord.Interaction, title: str, description: str):
         description=description,
         color=discord.Color.blue()
     )
-    embed.set_footer(text=f"Requested by {interaction.user.display_name}")
+    embed.set_footer(text=footer)
     await interaction.response.send_message(embed=embed)
 
 client.run(TOKEN)
