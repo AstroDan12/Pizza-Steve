@@ -21,11 +21,11 @@ class MyClient(discord.Client):
 
 client = MyClient()
 
-@client.tree.command(name="userphone", description="hopefully starts userphone")
+@client.tree.command(name="userphone", description="hopefully starts userphone", guild=discord.Object(id=GUILD_ID))
 async def userphone(interaction: discord.Interaction):
     await interaction.response.send_message('/userphone')
 
-@client.tree.command(name="embed", description="Send a custom embed with title and description")
+@client.tree.command(name="embed", description="Send a custom embed with title and description", guild=discord.Object(id=GUILD_ID))
 @app_commands.describe(
     title="Title of the embed",
     description="Description/body of the embed",
