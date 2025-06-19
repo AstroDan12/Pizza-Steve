@@ -15,8 +15,8 @@ class MyClient(discord.Client):
 
     async def on_ready(self):
         print(f"Bot is online as {self.user}")
-        await self.tree.sync(guild=guild)
         guild = discord.Object(id=GUILD_ID)
+        await self.tree.sync(guild=guild)
         print("Slash commands synced.")
 
 client = MyClient()
