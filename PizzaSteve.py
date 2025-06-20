@@ -14,8 +14,6 @@ class MyClient(discord.Client):
         self.tree = app_commands.CommandTree(self)
 
     async def on_ready(self):
-        await self.tree.clear_commands()
-        await self.tree.sync()
         print(f"Bot is online as {self.user}")
         guild = discord.Object(id=GUILD_ID)
         await self.tree.sync(guild=guild)
