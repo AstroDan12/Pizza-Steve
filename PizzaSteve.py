@@ -34,6 +34,9 @@ async def userphone(interaction: discord.Interaction):
     footer="footer of the embed"
 )
 async def embed(interaction: discord.Interaction, title: str, description: str, footer: str = None):
+    description = description.replace("||", "\n")
+    if footer:
+        footer = footer.replace("||", "\n")
     embed = discord.Embed(
         title=title,
         description=description,
