@@ -33,7 +33,7 @@ class MyClient(discord.Client):
             end = time.perf_counter()
             latency = round((end - start) * 1000)
             
-            await response.edit(content=f"Pizza Steve?\nLatency: {latency}ms")
+            await message.channel.send(f"Latency: {latency}ms")
 
 client = MyClient()
 
