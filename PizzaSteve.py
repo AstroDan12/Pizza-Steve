@@ -22,7 +22,7 @@ class MyClient(discord.Client):
 client = MyClient()
 
 @bot.event
-async def PizzaSteve(message)
+async def PizzaSteve(message):
     if message.author.bot:
         return
     if bot.user in message.mentions:
