@@ -21,6 +21,31 @@ class MyClient(discord.Client):
 
 client = MyClient()
 
+@bot.event
+async def PizzaSteve(message)
+    if message.author.bot:
+        return
+    if bot.user in message.mentions:
+        before = time.perf_counter()
+        typing = message.channel.typing()
+        await typing.__aenter__()  # Simulate typing to help measure latency
+        after = time.perf_counter()
+        await typing.__aexit__(None, None, None)
+
+        latency = round((after - before) * 1000)
+        
+        await message.channel.send("Pizza Steve?\n", latency + "ms")
+    elif "pizza steve!" in message.content.lower():
+        before = time.perf_counter()
+        typing = message.channel.typing()
+        await typing.__aenter__()  # Simulate typing to help measure latency
+        after = time.perf_counter()
+        await typing.__aexit__(None, None, None)
+
+        latency = round((after - before) * 1000)
+        
+        await message.channel.send("Pizza Steve?\n", latency + "ms")
+
 @client.tree.command(name="userphone", description="hopefully starts userphone", guild=discord.Object(id=GUILD_ID))
 async def userphone(interaction: discord.Interaction):
     await interaction.response.send_message('/userphone')
