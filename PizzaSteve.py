@@ -27,7 +27,7 @@ class MyClient(discord.Client):
 
         content = message.content.lower()
 
-        if self.user in message.mentions or "pizza steve!" in content:
+        if self.user in message.mentions or "pizza steve!" in content or any(role.name == "Pizza Steve" for role in message.role_mentions):
             start = time.perf_counter()
             response = await message.channel.send("Pizza Steve?")
             end = time.perf_counter()
