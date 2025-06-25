@@ -55,5 +55,16 @@ async def embed(interaction: discord.Interaction, title: str, description: str, 
     if footer:
         emb.set_footer(text=footer)
     await interaction.response.send_message(embed=emb)
-
+@client.tree.command(name="pizzacat", description="Posts a pizzacat", guild=discord.Object(id=GUILD_ID))
+@app_commands.describe(
+    channel="channel to send a pizzacat to"
+)
+async def pizzacat(interaction: discord.Interaction, channel: discord.TextChannel = None):
+    target_channel = channel or interaction.channel
+    try:
+        await target_channel.send('Pizzacat')
+    except discord.Forbidden:
+        await interaction.response.send_message('No permission in this channel')
+        ephemeral=True
+        
 client.run(TOKEN)
