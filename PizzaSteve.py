@@ -63,8 +63,8 @@ async def pizzacat(interaction: discord.Interaction, channel: discord.TextChanne
     if channel:
         target_channel = channel
         try:
+            await interaction.channel.send_message('Pizzacat sent', ephemeral = True)
             await target_channel.send('Pizzacat')
-            await interaction.response.defer()
         except discord.Forbidden:
             await interaction.response.send_message('Permissions not valid for this channel')
     else:
