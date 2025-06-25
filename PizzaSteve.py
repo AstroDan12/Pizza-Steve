@@ -62,12 +62,9 @@ async def embed(interaction: discord.Interaction, title: str, description: str, 
 async def pizzacat(interaction: discord.Interaction, channel: discord.TextChannel = None):
     if channel:
         target_channel = channel
+        try:
+            target_channel.send('Pizzacat')
     else:
-        target_channel = interaction.channel
-    try:
-        await target_channel.send('Pizzacat')
-    except discord.Forbidden:
-        await interaction.response.send_message('No permission in this channel')
-        ephemeral=True
+        await interaction.response.send_message('Pizzacat')
         
 client.run(TOKEN)
