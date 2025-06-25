@@ -60,7 +60,10 @@ async def embed(interaction: discord.Interaction, title: str, description: str, 
     channel="channel to send a pizzacat to"
 )
 async def pizzacat(interaction: discord.Interaction, channel: discord.TextChannel = None):
-    target_channel = channel or interaction.channel
+    if channel:
+        target_channel = channel
+    else:
+        target_channel = interaction.channel
     try:
         await target_channel.send('Pizzacat')
     except discord.Forbidden:
