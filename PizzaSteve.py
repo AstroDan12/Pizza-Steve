@@ -2,11 +2,20 @@ import discord
 from discord import app_commands
 import os
 import time
+import random
 from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 GUILD_ID = int(os.getenv("SERVER_ID"))
+        
+def load_image_links(filepath="images.txt"):
+    try:
+        with open(filepath, "r") as f:
+            return [line.strip() for line in f if line.strip().startswith("https://")]
+    except FileNotFoundError:
+        print("images.txt not found.")
+        return []
 
 class MyClient(discord.Client):
     def __init__(self):
@@ -20,7 +29,7 @@ class MyClient(discord.Client):
         guild = discord.Object(id=GUILD_ID)
         await self.tree.sync(guild=guild)
         print("Slash commands synced.")
-
+            
     async def on_message(self, message):
         if message.author.bot:
             return
@@ -64,10 +73,14 @@ async def pizzacat(interaction: discord.Interaction, channel: discord.TextChanne
         target_channel = channel
         try:
             await interaction.response.send_message('Pizzacat sent', ephemeral = True)
-            await target_channel.send('Pizzacat')
+            image_links = load_image_links()
+            image_url = random.choice(image_links)
+            await target_channel.send(image_url)
         except discord.Forbidden:
             await interaction.response.send_message('Permissions not valid for this channel')
     else:
-        await interaction.response.send_message('Pizzacat')
+        image_links = load_image_links()
+        image_url = random.choice(image_links)
+        await interaction.response.send_message(image_url)
         
 client.run(TOKEN)
