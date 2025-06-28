@@ -10,9 +10,10 @@ TOKEN = os.getenv("TOKEN")
 GUILD_ID = int(os.getenv("SERVER_ID"))
         
 def load_image_links(filepath="images.txt"):
+        
     try:
         with open(filepath, "r") as f:
-            return [line.strip() for line in f if line.strip().startswith("https://")]
+            return [line.strip() for line in f if line.strip().startswith("http://") or line.strip().startswith("https://")
     except FileNotFoundError:
         print("images.txt not found.")
         return []
