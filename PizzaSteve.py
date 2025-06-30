@@ -36,7 +36,10 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.author.bot:
             return
-
+                
+        if message.reference and self.user in message.mentions and len(message.mentions) == 1:
+            return
+                
         content = message.content.lower()
 
         if self.user in message.mentions or "pizza steve!" in content or any(role.name == "Pizza Steve" for role in message.role_mentions):
