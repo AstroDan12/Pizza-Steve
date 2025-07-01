@@ -47,11 +47,11 @@ class MyClient(discord.Client):
 
         if self.user in message.mentions or "pizza steve!" in content or any(role.name == "Pizza Steve" for role in message.role_mentions):
             start = time.perf_counter()
-            response = await message.channel.send("Pizza Steve?")
+            response = await message.channel.send("")
             end = time.perf_counter()
             latency = round((end - start) * 1000)
             
-            await message.channel.send(f"Latency: {latency}ms")
+            await message.channel.send(f"Pizza Steve?\nLatency: {latency}ms")
 
 client = MyClient()
 
