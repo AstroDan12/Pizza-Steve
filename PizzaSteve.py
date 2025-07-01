@@ -37,6 +37,7 @@ class MyClient(discord.Client):
         print("Slash commands synced.")
             
     async def on_message(self, message):
+        start = time.perf_counter()
         if message.author.bot:
             return
                 
@@ -46,8 +47,6 @@ class MyClient(discord.Client):
         content = message.content.lower()
 
         if self.user in message.mentions or "pizza steve!" in content or any(role.name == "Pizza Steve" for role in message.role_mentions):
-            start = time.perf_counter()
-            response = await message.channel.send("")
             end = time.perf_counter()
             latency = round((end - start) * 1000)
             
