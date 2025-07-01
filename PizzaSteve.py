@@ -47,6 +47,7 @@ class MyClient(discord.Client):
         content = message.content.lower()
 
         if self.user in message.mentions or "pizza steve!" in content or any(role.name == "Pizza Steve" for role in message.role_mentions):
+            await message.channel.send("Latency Test Running", ephemeral = True)
             end = time.perf_counter()
             latency = round((end - start) * 1000)
             
