@@ -55,11 +55,11 @@ class MyClient(discord.Client):
 
 client = MyClient()
 
-@client.tree.command(name="userphone", description="hopefully starts userphone")
+@client.tree.command(name="userphone", description="hopefully starts userphone", guilds=[discord.Object(id=guild_id) for guild_id in MY_GUILD_IDS])
 async def userphone(interaction: discord.Interaction):
     await interaction.response.send_message('/userphone')
 
-@client.tree.command(name="embed", description="Send a custom embed with title and description")
+@client.tree.command(name="embed", description="Send a custom embed with title and description", guilds=[discord.Object(id=guild_id) for guild_id in MY_GUILD_IDS])
 @app_commands.describe(
     title="Title of the embed",
     description="Description/body of the embed",
@@ -73,7 +73,8 @@ async def embed(interaction: discord.Interaction, title: str, description: str, 
     if footer:
         emb.set_footer(text=footer)
     await interaction.response.send_message(embed=emb)
-@client.tree.command(name="pizzacat", description="Posts a pizzacat")
+        
+@client.tree.command(name="pizzacat", description="Posts a pizzacat", guilds=[discord.Object(id=guild_id) for guild_id in MY_GUILD_IDS])
 @app_commands.describe(
     channel="channel to send a pizzacat to"
 )
