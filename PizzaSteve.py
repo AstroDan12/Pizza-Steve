@@ -30,7 +30,7 @@ class MyClient(discord.Client):
     async def on_ready(self):
         print(f"Bot is online as {self.user}")
         for guild_id in GUILD_ID:
-                guild = discord.Object(id=GUILD_ID)
+                guild = discord.Object(id=guild_id)
                 await self.tree.sync(guild=guild)
                 print(f"Synced commands for guild {guild_id}")
         print("Synced commands for all guilds")
