@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
-GUILD_ID = int(os.getenv("SERVER_ID"))
+GUILD_ID = list(map(int, os.getenv("SERVER_ID").split(", ")))
         
 def load_image_links(filepath="images.txt"):
     try:
@@ -29,8 +29,11 @@ class MyClient(discord.Client):
 
     async def on_ready(self):
         print(f"Bot is online as {self.user}")
-        guild = discord.Object(id=GUILD_ID)
-        await self.tree.sync(guild=guild)
+        for guild_id in GUILD_ID:
+                guild = discord.Object(id=GUILD_ID)
+                await self.tree.sync(guild=guild)
+                print(f"Synced commands for guild {guild_id}")
+        print("Synced commands for all guilds")
         print("Slash commands synced.")
             
     async def on_message(self, message):
@@ -52,11 +55,11 @@ class MyClient(discord.Client):
 
 client = MyClient()
 
-@client.tree.command(name="userphone", description="hopefully starts userphone", guild=discord.Object(id=GUILD_ID))
+@client.tree.command(name="userphone", description="hopefully starts userphone")
 async def userphone(interaction: discord.Interaction):
     await interaction.response.send_message('/userphone')
 
-@client.tree.command(name="embed", description="Send a custom embed with title and description", guild=discord.Object(id=GUILD_ID))
+@client.tree.command(name="embed", description="Send a custom embed with title and description")
 @app_commands.describe(
     title="Title of the embed",
     description="Description/body of the embed",
@@ -70,7 +73,7 @@ async def embed(interaction: discord.Interaction, title: str, description: str, 
     if footer:
         emb.set_footer(text=footer)
     await interaction.response.send_message(embed=emb)
-@client.tree.command(name="pizzacat", description="Posts a pizzacat", guild=discord.Object(id=GUILD_ID))
+@client.tree.command(name="pizzacat", description="Posts a pizzacat")
 @app_commands.describe(
     channel="channel to send a pizzacat to"
 )
